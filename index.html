@@ -54,7 +54,7 @@
     .cb-panel.open {
       display: flex;
       transform: translateX(0);
-      height:100vh;
+      height:100dvh;
     }
 
     /* Desktop / tablet → side panel */
@@ -113,7 +113,8 @@
       z-index: 10;
       pointer-events: none;
       width:100%;  
-border-top:2px solid #000000;   
+      border-top:2px solid #000000;
+      order: 2;
     }
    
 
@@ -175,7 +176,7 @@ border-top:2px solid #000000;
     [role="main"] .webchat__send-box__main {
       border: 1px solid #000000 !important;
       border-radius:10px;
-      height: 24px !important;
+      height: auto !important;
       padding:10px !important;
       margin-left:12px;
       margin-right:12px;
