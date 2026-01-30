@@ -54,21 +54,125 @@
     .cb-panel.open {
       display: flex;
       transform: translateX(0);
-      height:100dvh;
+      height:100vh;
     }
 
-    /* Desktop / tablet → side panel */
+
+@media (max-width: 479px) {
+  .cb-launcher {
+    bottom: 16px;
+    right: 16px;
+    padding: 6px 6px 6px 12px;
+  }
+  .cb-launcher-text { font-size: 14px; margin: 0 10px; }
+  .cb-launcher-logo  { width: 26px; height: 26px; }
+  .cb-launcher-icon-box { width: 30px; height: 30px; font-size: 19px; }
+}
+
     @media (min-width: 768px) {
-      .cb-panel {
-        inset: auto 0 0 auto;
-        width: 420px;
-        height: 100%;
-        max-width: 90vw;
-        border-top-left-radius: 12px;
-        border-bottom-left-radius: 12px;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-      }
-    }
+  .cb-panel {
+    inset: auto 0 0 auto;
+    width: 400px;                /* was 420 – slightly narrower feels better */
+    max-width: 85vw;
+    border-radius: 16px 0 0 16px;
+    box-shadow: -12px 0 40px rgba(0,0,0,0.18);
+  }
+
+  .cb-header-banner {
+    padding: 12px 20px;
+    height: 56px;
+  }
+
+  .cb-header-logo { width: 90px; height: 56px; }
+  .cb-banner-text { font-size: 19px; bottom: 14px; }
+}
+
+/* Larger tablets & small laptops */
+@media (min-width: 1025px) {
+  .cb-panel {
+    width: 440px;
+    max-width: 420px;           /* prevent taking too much space */
+  }
+}
+
+/* Desktops – generous width */
+@media (min-width: 1281px) {
+  .cb-panel {
+    width: 480px;
+    max-width: 460px;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .cb-launcher {
+    bottom: 32px;
+    right: 32px;
+  }
+}
+
+/* ── Chat content tweaks per size ── */
+
+.cb-chat-container,
+#webchat {
+  padding: 0 8px;               /* base mobile padding */
+}
+
+@media (min-width: 768px) {
+  .cb-chat-container,
+  #webchat {
+    padding: 0 12px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .cb-chat-container,
+  #webchat {
+    padding: 0 16px;
+  }
+}
+
+/* Suggested actions – make them wider & readable on bigger screens */
+@media (min-width: 768px) {
+  [role="main"] .webchat__suggested-action {
+    width: 88% !important;
+    min-height: 52px !important;
+    font-size: 13px !important;           /* ← bit bigger is ok on tablet/desktop */
+  }
+}
+
+@media (min-width: 1025px) {
+  [role="main"] .webchat__suggested-action {
+    width: 92% !important;
+    min-height: 56px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* Input box – avoid too cramped on small screens */
+@media (max-width: 479px) {
+  [role="main"] .webchat__send-box__main {
+    height: 22px !important;
+    padding: 8px !important;
+    margin: 20px 10px 0 !important;
+  }
+  .webchat__send-box__text-box__input {
+    font-size: 13.5px !important;
+    padding: 10px !important;
+  }
+}
+
+/* Disclaimer readability */
+.cb-ai-disclaimer {
+  font-size: 10px;
+  padding: 6px 12px;
+  bottom: 90px;               /* adjust if sendbox height changes */
+}
+
+@media (min-width: 768px) {
+  .cb-ai-disclaimer {
+    font-size: 11px;
+    padding: 8px 20px;
+  }
+}
 
     .cb-header-banner {
       background-color: #221C9E;
@@ -113,8 +217,7 @@
       z-index: 10;
       pointer-events: none;
       width:100%;  
-      border-top:2px solid #000000;
-      order: 2;
+border-top:2px solid #000000;   
     }
    
 
@@ -176,7 +279,7 @@
     [role="main"] .webchat__send-box__main {
       border: 1px solid #000000 !important;
       border-radius:10px;
-      height: auto !important;
+      height: 24px !important;
       padding:10px !important;
       margin-left:12px;
       margin-right:12px;
@@ -285,9 +388,11 @@ button.webchat__link-definitions__list-item {
 </div>
 </div>
 <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script><script>
-  const botSecret = "SECRET_PLACEHOLDER";
 
-  function openCbChat() {
+const botSecret = "SECRET_PLACEHOLDER";
+
+
+function openCbChat() {
     document.getElementById('cb-chat-panel').classList.add('open');
     document.getElementById('chat-launcher').style.display = 'none';
     renderCbChat();
