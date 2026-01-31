@@ -63,6 +63,38 @@
       height: 100vh;
     }
 
+   @media (max-width: 767px) { 
+  .cb-launcher { 
+    bottom: 16px; right: 16px; padding: 6px 6px 6px 12px; border-radius: 10px; 
+  } 
+  .cb-launcher-text { font-size: 14px; margin: 0 10px; } 
+  .cb-launcher-logo { width: 26px; height: 26px; } 
+  .cb-launcher-icon-box { width: 30px; height: 30px; font-size: 20px; } 
+ 
+  .cb-header-banner { padding: 10px 16px; height: auto; } 
+  .cb-header-logo { width: 70px; height: 50px; } 
+  .cb-banner-text { font-size: 16px; bottom: 10px; } 
+  .cb-close-btn { font-size: 30px; } 
+ 
+  .cb-ai-disclaimer { 
+    bottom: 105px !important;  
+    font-size: 10px; 
+    background: #fff; 
+    z-index: 20; 
+  } 
+ 
+  [role="main"] .webchat__send-box__main { 
+    margin: 10px 10px 60px 10px !important;
+     position: relative !important;
+      z-index: 10 !important;
+  } 
+ 
+  [role="main"] .webchat__suggested-action { 
+    width: 92% !important; 
+  } 
+}
+
+
     /* Desktop / tablet → side panel */
     @media (min-width: 768px) {
       .cb-panel {
