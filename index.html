@@ -112,7 +112,7 @@
     /* ===== ဖုန်းအတွက် အဓိက ပြင်ဆင်ချက် (မူရင်းဒီဇိုင်းမပြောင်းပါ) ===== */
     @media (max-width: 767px) { 
   .cb-launcher { 
-    bottom: 18px; right: 16px; padding: 6px 6px 6px 12px; border-radius: 10px; 
+    bottom: 16px; right: 16px; padding: 6px 6px 6px 12px; border-radius: 10px; 
   } 
   .cb-launcher-text { font-size: 14px; margin: 0 10px; } 
   .cb-launcher-logo { width: 26px; height: 26px; } 
@@ -131,7 +131,9 @@
   } 
  
   [role="main"] .webchatsend-boxmain { 
-    margin: 20px 10px 70px 10px !important;  
+    margin: 20px 10px 70px 10px !important;
+     position: relative !important;
+      z-index: 10 !important;
   } 
  
   [role="main"] .webchat__suggested-action { 
