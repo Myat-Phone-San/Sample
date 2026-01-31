@@ -79,6 +79,8 @@
       transform: translateX(0);
     }
 
+    
+
     @media (min-width: 768px) {
       .cb-panel {
         inset: auto 0 0 auto;
@@ -141,14 +143,14 @@
 
     .cb-ai-disclaimer {
       position: absolute;
-      bottom: 90px; 
+      bottom: 76px; 
       left: 0;
       right: 0;
-      text-align: center;
+      text-align: right;
       font-size: 10.5px;
       color: #666;
       background: rgba(255, 255, 255, 0.9);
-      border-top: 1px solid #000;
+      border-top: 2px solid #000;
       z-index: 5;
       pointer-events: none;
     }
@@ -165,12 +167,24 @@
     /* Space out the last message so the disclaimer doesn't hide it */
     [role="main"] .webchat__basic-transcript__scrollable {
         padding-bottom: 40px !important; 
+        
+    }
+
+      /* General webchat text fixes */
+    [role="main"] .webchat__basic-transcript__activity-body {
+      text-align: left !important;
+      position:relative;
+      top:50px;
     }
 
     .webchat__send-box__text-box__input {
       background: #f8f9fa !important;
       padding: 12px !important;
       font-size: 16px !important;
+    }
+
+    .webchat__suggested-actions__stack{
+      margin-bottom: 24px !important;
     }
 
     /* Suggested actions */
@@ -187,6 +201,7 @@
       border-radius: 10px !important;
       background: #fff !important;
       margin-left: auto !important;
+      
     }
 
     [role="main"] .webchat__suggested-action:hover {
@@ -273,8 +288,7 @@
 
 <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 <script>
- const botSecret = "SECRET_PLACEHOLDER";
-
+  const botSecret = "SECRET_PLACEHOLDER";
 
   function openCbChat() {
     document.getElementById('cb-chat-panel').classList.add('open');
