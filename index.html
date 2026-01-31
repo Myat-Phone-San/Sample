@@ -63,36 +63,7 @@
       height: 100vh;
     }
 
-   @media (max-width: 767px) { 
-  .cb-launcher { 
-    bottom: 16px; right: 16px; padding: 6px 6px 6px 12px; border-radius: 10px; 
-  } 
-  .cb-launcher-text { font-size: 14px; margin: 0 10px; } 
-  .cb-launcher-logo { width: 26px; height: 26px; } 
-  .cb-launcher-icon-box { width: 30px; height: 30px; font-size: 20px; } 
- 
-  .cb-header-banner { padding: 10px 16px; height: auto; } 
-  .cb-header-logo { width: 70px; height: 50px; } 
-  .cb-banner-text { font-size: 16px; bottom: 10px; } 
-  .cb-close-btn { font-size: 30px; } 
- 
-  .cb-ai-disclaimer { 
-    bottom: 105px !important;  
-    font-size: 10px; 
-    background: #fff; 
-    z-index: 20; 
-  } 
- 
-  [role="main"] .webchat__send-box__main { 
-    margin: 10px 10px 60px 10px !important;
-     position: relative !important;
-      z-index: 10 !important;
-  } 
- 
-  [role="main"] .webchat__suggested-action { 
-    width: 92% !important; 
-  } 
-}
+  
 
 
     /* Desktop / tablet → side panel */
@@ -145,7 +116,7 @@
       text-align: right;
       font-size: 10.5px;
       color: #666;
-      background: transparent;
+      background: #ffffff;
       padding: 4px 0;
       z-index: 10;
       pointer-events: none;
@@ -322,6 +293,7 @@
       .cb-ai-disclaimer {
         font-size: 9.5px;
         bottom: 90px;
+        background:#ffffff;
       }
     }
 
@@ -344,6 +316,9 @@
         margin-left: 12px;
         margin-right: 12px;
       }
+       .cb-ai-disclaimer {
+        background:#ffffff;
+      }
     }
 
     /* Tablets – 768–1024px */
@@ -363,6 +338,7 @@
 
       .cb-ai-disclaimer {
         bottom: 108px;
+        background:#ffffff;
       }
     }
 
@@ -370,6 +346,9 @@
     @media (min-width: 1025px) and (max-width: 1280px) {
       .cb-panel {
         width: 400px;
+      }
+       .cb-ai-disclaimer {
+        background:#ffffff;
       }
     }
 
@@ -379,6 +358,9 @@
         padding: 8px 8px 8px 16px;
       }
       .cb-launcher-text { font-size: 17px; }
+       .cb-ai-disclaimer {
+        background:#ffffff;
+      }
     }
   </style>
 </head>
