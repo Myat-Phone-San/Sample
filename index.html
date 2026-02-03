@@ -85,6 +85,8 @@
     
 
     @media (min-width: 768px) {
+
+
       .cb-panel {
         inset: auto 0 0 auto;
         width: 420px;
@@ -166,10 +168,25 @@
       color: #000 !important;
     }
 
+/* Force the feedback container to be visible */
+.webchat__text-content__activity-actions,
+.webchat__feedback-form {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    margin: 4px 0 !important;
+}
+.webchat__feedback-form__button {
+    padding: 4px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    cursor: pointer !important;
+}
 
     /* Space out the last message so the disclaimer doesn't hide it */
     [role="main"] .webchat__basic-transcript__scrollable {
-        padding-bottom: 40px !important; 
+        padding-bottom: 80px !important; 
         
     }
 
@@ -182,9 +199,16 @@
 
     .webchat__send-box__text-box__input {
       background: #f8f9fa !important;
-      padding: 12px !important;
-      font-size: 16px !important;
-    }
+    padding: 10px !important;
+    font-size: 14px !important;
+    
+    /* Forces the fixed-height vertical scroll behavior */
+    height: 100px !important;      /* Set your desired fixed height here */
+    overflow-y: auto !important;   /* Enables vertical scrolling */
+    white-space: pre-wrap !important; 
+    display: block !important;
+}
+    
 
     .webchat__suggested-actions__stack{
       margin-bottom: 24px !important;
@@ -222,12 +246,17 @@
 
     /* Send box styling */
     [role="main"] .webchat__send-box__main {
-      border: 1px solid #000 !important;
-      border-radius: 10px !important;
-      padding: 5px !important;
-      margin: 8px 12px !important;
-      z-index: 10 !important;
-      background: #fff;
+     border: 1px solid #000 !important;
+    border-radius: 10px !important;
+    margin: 8px 12px !important;
+    z-index: 10 !important;
+    background: #fff;
+    
+    /* Prevents the container from growing with the text */
+    max-height: 120px !important; 
+    overflow: hidden !important; 
+    display: flex !important;
+    align-items: center !important;
     }
 
     /* Hide citations */
@@ -251,7 +280,7 @@
       .cb-ai-disclaimer {
         bottom: 120px;
         font-size: 10px;
-        background:#ffffff !important;
+        background:#ffffff !important
         
       }
 
@@ -322,8 +351,13 @@
       bubbleFromUserBackground: '#e0faff',
       bubbleFromUserBorderColor: '#d1d1d1',
       bubbleFromUserBorderRadius: 10,
-      sendBoxHeight: 50,
+      sendBoxHeight: 60, // Change from a fixed 50 to 'auto'
+      sendBoxMaxHeight: 45, // Limits how tall it gets before scrolling
+      sendBoxTextWrap: true, // This allows the text to wrap to a new line
       hideUploadButton: true,
+      hideFeedbackButtons: false, // Ensure they aren't forced hidden
+      showSpokenHelp: false,
+      feedbackGroupTitle: 'Was this helpful?',
       suggestedActionLayout: 'stacked'
     };
 
