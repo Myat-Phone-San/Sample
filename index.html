@@ -351,6 +351,7 @@
 <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 <script>
   const botSecret = "SECRET_PLACEHOLDER";
+
   // အရေးကြီးသည်- store ကို အပြင်မှာ ကြေညာထားမှ click event က လှမ်းသုံးနိုင်မှာပါ
   let store;
   let hasRendered = false;
@@ -409,7 +410,7 @@
   // Follow-up Question Buttons ကို Click လုပ်လျှင် အလုပ်လုပ်စေမည့် Logic
   document.addEventListener('click', function (e) {
     // UI ထဲက list items (li) ကို နှိပ်လိုက်သလား စစ်ဆေးခြင်း
-    const listItem = e.target.closest('.webchat__text-content ol li, .webchat__text-content ul li');
+    const listItem = e.target.closest('.webchat__text-content ol li');
     
     if (listItem && store) {
       // 1. Button ထဲက စာသားကို ရယူခြင်း
