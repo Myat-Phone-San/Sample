@@ -271,6 +271,32 @@
       display: none !important;
     }
 
+    /* AI အဖြေထဲက Follow-up list တွေကို Button ပုံစံပြောင်းခြင်း */
+[role="main"] .webchat__text-content ol {
+    padding: 0 !important;
+    margin: 10px 0 !important;
+    list-style-type: none !important; /* နံပါတ်စဉ်တွေ ဖျောက်ရန် */
+}
+
+[role="main"] .webchat__text-content ol li {
+    display: block !important;
+    background: #ffffff !important;
+    border: 1.5px solid #0242bd !important;
+    border-radius: 20px !important;
+    padding: 10px 15px !important;
+    margin-bottom: 8px !important;
+    cursor: pointer !important;
+    color: #0242bd !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    text-align: center !important;
+    transition: all 0.2s ease;
+}
+
+[role="main"] .webchat__text-content ol li:hover {
+    background: #eef4ff !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
     /* ================= MOBILE FIX ================= */
     @media (max-width: 767px) {
       
@@ -325,6 +351,9 @@
 <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 <script>
   const botSecret = "SECRET_PLACEHOLDER";
+  // အရေးကြီးသည်- store ကို အပြင်မှာ ကြေညာထားမှ click event က လှမ်းသုံးနိုင်မှာပါ
+  let store;
+  let hasRendered = false;
 
   function openCbChat() {
     document.getElementById('cb-chat-panel').classList.add('open');
@@ -340,10 +369,17 @@
     }, 350);
   }
 
-  let hasRendered = false;
   function renderCbChat() {
     if (hasRendered) return;
     hasRendered = true;
+
+    // Web Chat Store ကို Global variable ထဲသို့ ထည့်သွင်းခြင်း
+    store = window.WebChat.createStore({}, ({ dispatch }) => next => action => {
+      if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
+        dispatch({ type: 'WEB_CHAT/SEND_EVENT', payload: { name: 'startConversation', value: '' } });
+      }
+      return next(action);
+    });
 
     const styleOptions = {
       accent: '#0242bd',
@@ -353,29 +389,44 @@
       bubbleFromUserBackground: '#e0faff',
       bubbleFromUserBorderColor: '#d1d1d1',
       bubbleFromUserBorderRadius: 10,
-      sendBoxHeight: 60, // Change from a fixed 50 to 'auto'
-      sendBoxMaxHeight: 45, // Limits how tall it gets before scrolling
-      sendBoxTextWrap: true, // This allows the text to wrap to a new line
+      sendBoxHeight: 60,
+      sendBoxMaxHeight: 45,
+      sendBoxTextWrap: true,
       hideUploadButton: true,
-      hideFeedbackButtons: false, // Ensure they aren't forced hidden
+      hideFeedbackButtons: false,
       showSpokenHelp: false,
       feedbackGroupTitle: 'Was this helpful?',
       suggestedActionLayout: 'stacked'
     };
 
-    const store = window.WebChat.createStore({}, ({ dispatch }) => next => action => {
-      if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
-        dispatch({ type: 'WEB_CHAT/SEND_EVENT', payload: { name: 'startConversation', value: '' } });
-      }
-      return next(action);
-    });
-
     window.WebChat.renderWebChat({
       directLine: window.WebChat.createDirectLine({ secret: botSecret }),
-      store: store,
+      store: store, // store ကို ဒီမှာ ချိတ်ဆက်ပါ
       styleOptions: styleOptions
     }, document.getElementById('webchat'));
   }
+
+  // Follow-up Question Buttons ကို Click လုပ်လျှင် အလုပ်လုပ်စေမည့် Logic
+  document.addEventListener('click', function (e) {
+    // UI ထဲက list items (li) ကို နှိပ်လိုက်သလား စစ်ဆေးခြင်း
+    const listItem = e.target.closest('.webchat__text-content ol li, .webchat__text-content ul li');
+    
+    if (listItem && store) {
+      // 1. Button ထဲက စာသားကို ရယူခြင်း
+      const questionText = listItem.innerText.trim();
+      
+      // 2. Bot ဆီသို့ စာတိုက်ရိုက်ပို့ခြင်း (Dispatch action)
+      // ဒီနည်းလမ်းက Bot ကို အဖြေပြန်ပေးဖို့ trigger လုပ်ပေးပါတယ်
+      store.dispatch({
+        type: 'WEB_CHAT/SEND_MESSAGE',
+        payload: { text: questionText }
+      });
+
+      // 3. User နှိပ်လိုက်ကြောင်း သိသာစေရန် effect ပေးခြင်း
+      listItem.style.opacity = "0.6";
+      setTimeout(() => { listItem.style.opacity = "1"; }, 300);
+    }
+  });
 </script>
 
 </body>
